@@ -1,2 +1,0 @@
-# myfristproject
-python project
