@@ -1,5 +1,3 @@
-item1 = "chair"
-item2 = "desk"
 valeur1 = input ("hi , are you buy desk or chair or no? ")
 valeur2 = input ("hi , are you buy chair or desk or no? ")
 if (valeur1 == "desk" and valeur2 == "chair") or (valeur1 == "chair" and valeur2 == "desk") :
