@@ -1,6 +1,6 @@
 # This is a simple Python script that uses the turtle graphics library to draw a square.
 import turtle
-\
+
 # prepare le windowe pour start the game
 wind = turtle.Screen()
 wind.title("younes")
