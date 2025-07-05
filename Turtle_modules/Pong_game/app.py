@@ -18,12 +18,8 @@ module_1.penup()
 module_1.goto(-350,0)
 
 # module_2
-module_2 = turtle.Turtle()
-module_2.speed(0)
-module_2.shape("square")
-module_2.color("blue")
-module_2.shapesize(stretch_wid=5 , stretch_len=1)
-module_2.penup()
+module_2 = module_1.clone()
+module_1.color("blue")
 module_2.goto(350,0)
 
 # ball
