@@ -5,7 +5,6 @@ wind = turtle.Screen()
 wind.title("younes")
 wind.bgcolor("black")
 wind.setup(width=800 , height=600)
-wind.tracer(0)
 
 t = turtle.Turtle()
 t.speed(0)
