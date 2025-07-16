@@ -1,3 +1,31 @@
+
+def main() :
+    message = """
+       1-add task
+       2-mark task he is complete
+       3-view tasks
+       4-quit """
+
+    global tasks
+    
+    tasks = []
+
+    while True :
+        print (message)
+        choice = input("Enter your choice :")
+
+        if choice =="1" :
+            add_task()
+        elif choice =="2" :
+            mark_task()
+        elif choice =="3" :
+            view_task()
+        elif choice =="4" : 
+            quit()
+        else :
+            print("your choice is false enter number enter 1 and 4")
+
+
 def add_task() :
     enter = input("enter your task : ")
     status = {"task":enter , "completed":False}
@@ -40,28 +68,6 @@ def view_task() :
         print(f"{n} - {task['task']} : {j}")
     print("-"*30)
 
-message = """
-   1-add task
-   2-mark task he is complete
-   3-view tasks
-   4-quit """
-
-tasks = []
-
-
-while True :
-    print (message)
-    choice = input("Enter your choice :")
-
-    if choice =="1" :
-        add_task()
-    elif choice =="2" :
-        mark_task()
-    elif choice =="3" :
-        view_task()
-    elif choice =="4" : 
-        quit()
-    else :
-        print("your choice is false enter number enter 1 and 4")
+main()
 
 
