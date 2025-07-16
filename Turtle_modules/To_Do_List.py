@@ -3,6 +3,7 @@ def add_task() :
     status = {"task":enter , "completed":False}
     tasks.append(status)
     print("add task he is succes")
+    print("-"*30)
 
 def mark_task() :
     #get list to task incompeted 
