@@ -71,4 +71,3 @@ def view_task() :
 
 main()
 
-
