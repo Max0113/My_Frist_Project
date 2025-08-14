@@ -83,7 +83,7 @@ class student :
         lbl_Button5 = Button(fram1,text="من نحن",width=20,bg="#949191",fg="#ffffff")
         lbl_Button5.pack(pady=5)
 
-        lbl_Button6 = Button(fram1,text="اغلاق البرنامج",width=20,bg="#949191",fg="#ffffff")
+        lbl_Button6 = Button(fram1,text="اغلاق البرنامج",width=20,bg="#949191",fg="#ffffff",command=quit)
         lbl_Button6.pack(pady=5)
 
 
@@ -104,6 +104,48 @@ class student :
 
         Search_Button = Button(search_farm, text="البحث",width=15,bg="#6bbaff")
         Search_Button.place(x=530,y=10)
+
+        # -------- databise ----------
+
+        fram_databise = Frame(self.win, bg="#D7D7D7")
+        fram_databise.place(x=4,y=81,width=1087,height=612)
+
+        # -------- scroll ----------
+
+        scroll_x = Scrollbar(fram_databise,orient=HORIZONTAL)
+        scroll_y = Scrollbar(fram_databise,orient=VERTICAL)
+
+        # -------- Table -----------
+
+        self.student_table = ttk.Treeview(fram_databise,
+        columns=("address","gender","certi","phone","email","name","id"),
+        xscrollcommand=scroll_x.set,
+        yscrollcommand=scroll_y.set)
+
+        self.student_table.place(x=17,y=1,width=1120,height=593)
+
+        scroll_x.pack(side=BOTTOM,fill=X)
+        scroll_y.pack(side=LEFT,fill=Y)
+
+        scroll_x.config(command=self.student_table.xview)
+        scroll_y.config(command=self.student_table.yview)
+
+        self.student_table["show"] = "headings"
+        self.student_table.heading('address',text="عنوان الطالب")
+        self.student_table.heading('gender',text="جنس الطالب")
+        self.student_table.heading('certi',text="مؤهلات الطالب")
+        self.student_table.heading('phone',text="هاتف الطالب")
+        self.student_table.heading('email',text="ايميل الطالب")
+        self.student_table.heading('name',text="اسم الطالب")
+        self.student_table.heading('id',text="ID")
+
+        self.student_table.column('address',width=130)
+        self.student_table.column('gender',width=30)
+        self.student_table.column('certi',width=65)
+        self.student_table.column('phone',width=65)
+        self.student_table.column('email',width=70)
+        self.student_table.column('name',width=30)
+        self.student_table.column('id',width=17)
 
 
 win = Tk()
