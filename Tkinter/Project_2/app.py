@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import ttk
+import pymysql
 
 class student :
     def __init__(self,win):
@@ -10,54 +11,63 @@ class student :
         self.win.resizable(False,False)
         title = Label(self.win , text="نظام تسجيل الطلاب" ,bg="#0096b8" ,fg="#ffffff")
         title.pack(fill=X)
+        # ----------- varaible ----------
+
+        self.ID_var = StringVar()
+        self.Name_var = StringVar()
+        self.Email_var = StringVar()
+        self.Phone_var = StringVar()
+        self.Qualifications_var = StringVar()
+        self.Sex_var = StringVar()
+        self.Addresse_var = StringVar()
+        self.Delete_var = StringVar()
+
+        self.Search_var = StringVar()
+        self.choase_var = StringVar()
+
         # ----------- أدوات تحكم بالبرنامج --------------
         fram = Frame(self.win , bg="#ffffff")
         fram.place(x=1096,y=25,width=250,height=420)
         
         lbl_ID = Label(fram, text="الرقم التسلسلي" ,bg="#ffffff")
         lbl_ID.pack()
-        ID_Entry = Entry(fram, bd=2 , justify="center")
+        ID_Entry = Entry(fram,textvariable=self.ID_var , bd=2 , justify="center")
         ID_Entry.pack()
 
         lbl_Name = Label(fram, text="اسم الطالب" ,bg="#ffffff")
         lbl_Name.pack()
-        Name_Entry = Entry(fram, bd=2 , justify="center")
+        Name_Entry = Entry(fram, bd=2 ,textvariable=self.Name_var , justify="center")
         Name_Entry.pack()
 
-        lbl_Email = Label(fram, text="ايميل الطالب" ,bg="#ffffff")
+        lbl_Email = Label(fram , text="ايميل الطالب" ,bg="#ffffff")
         lbl_Email.pack()
-        Email_Entry = Entry(fram, bd=2 , justify="center")
+        Email_Entry = Entry(fram,textvariable=self.Email_var, bd=2 , justify="center")
         Email_Entry.pack()
 
-        lbl_Phone = Label(fram, text="هاتف الطالب" ,bg="#ffffff")
+        lbl_Phone = Label(fram , text="هاتف الطالب" ,bg="#ffffff")
         lbl_Phone.pack()
-        Phone_Entry = Entry(fram, bd=2 , justify="center")
-        Phone_Entry.pack()
-
-        lbl_Phone = Label(fram, text="هاتف الطالب" ,bg="#ffffff")
-        lbl_Phone.pack()
-        Phone_Entry = Entry(fram, bd=2 , justify="center")
+        Phone_Entry = Entry(fram, textvariable=self.Phone_var ,bd=2 , justify="center")
         Phone_Entry.pack()
 
         lbl_qualifications = Label(fram, text="مؤهلات الطالب" ,bg="#ffffff")
         lbl_qualifications.pack()
-        qualifications_Entry = Entry(fram, bd=2 , justify="center")
+        qualifications_Entry = Entry(fram, textvariable=self.Qualifications_var , bd=2 , justify="center")
         qualifications_Entry.pack()
 
         lbl_Sex = Label(fram, text="جنس الطالب" ,bg="#ffffff")
         lbl_Sex.pack()
         array = ("male","famille")
-        choasie = ttk.Combobox(fram,values=(array))
+        choasie = ttk.Combobox(fram,values=(array),textvariable=self.Sex_var)
         choasie.pack()
 
         lbl_Addresse = Label(fram, text="عنوان الطالب" ,bg="#ffffff")
         lbl_Addresse.pack()
-        Addresse_Entry = Entry(fram, bd=2 , justify="center")
+        Addresse_Entry = Entry(fram, textvariable=self.Addresse_var , bd=2 , justify="center")
         Addresse_Entry.pack()
 
         lbl_delete = Label(fram, text="حدف الطالب" ,bg="#ffffff" , fg="red")
         lbl_delete.pack()
-        delete_Entry = Entry(fram, bd=2 , justify="center")
+        delete_Entry = Entry(fram, textvariable=self.Delete_var , bd=2 , justify="center")
         delete_Entry.pack()
 
         # -------- Button ---------
@@ -68,7 +78,7 @@ class student :
         title1 = Label(fram1,text="لوحة التحكم",bg="#2877ff" ,fg="#ffffff",font=("29LT Azer",15))
         title1.pack(fill=X)
         
-        lbl_Button1 = Button(fram1,text="اضافة الطالب",width=20,bg="#949191" ,fg="#ffffff")
+        lbl_Button1 = Button(fram1,text="اضافة الطالب",width=20,bg="#949191" ,fg="#ffffff",command=self.add_student)
         lbl_Button1.pack(pady=5)
 
         lbl_Button2 = Button(fram1,text="حدف الطالب",width=20,bg="#949191",fg="#ffffff")
@@ -96,10 +106,10 @@ class student :
         text.place(x=980,y=12)
  
         array1 = ("id","name","email","phone")
-        choasie = ttk.Combobox(search_farm,values=(array1))
+        choasie = ttk.Combobox(search_farm, textvariable=self.choase_var ,values=(array1))
         choasie.place(x=820,y=12)
 
-        Search_Entry = Entry(search_farm, bd=2 , justify="left")
+        Search_Entry = Entry(search_farm, textvariable=self.Search_var , bd=2 , justify="left")
         Search_Entry.place(x=670,y=13)
 
         Search_Button = Button(search_farm, text="البحث",width=15,bg="#6bbaff")
@@ -118,7 +128,7 @@ class student :
         # -------- Table -----------
 
         self.student_table = ttk.Treeview(fram_databise,
-        columns=("address","gender","certi","phone","email","name","id"),
+        columns=("id","name","email","phone","certi","gender","address"),
         xscrollcommand=scroll_x.set,
         yscrollcommand=scroll_y.set)
 
@@ -131,22 +141,58 @@ class student :
         scroll_y.config(command=self.student_table.yview)
 
         self.student_table["show"] = "headings"
-        self.student_table.heading('address',text="عنوان الطالب")
-        self.student_table.heading('gender',text="جنس الطالب")
-        self.student_table.heading('certi',text="مؤهلات الطالب")
-        self.student_table.heading('phone',text="هاتف الطالب")
-        self.student_table.heading('email',text="ايميل الطالب")
-        self.student_table.heading('name',text="اسم الطالب")
-        self.student_table.heading('id',text="ID")
+        self.student_table.heading('id', text="ID")
+        self.student_table.heading('name', text="اسم الطالب")
+        self.student_table.heading('email', text="ايميل الطالب")
+        self.student_table.heading('phone', text="هاتف الطالب")
+        self.student_table.heading('certi', text="مؤهلات الطالب")
+        self.student_table.heading('gender', text="جنس الطالب")
+        self.student_table.heading('address', text="عنوان الطالب")
 
-        self.student_table.column('address',width=130)
-        self.student_table.column('gender',width=30)
-        self.student_table.column('certi',width=65)
-        self.student_table.column('phone',width=65)
-        self.student_table.column('email',width=70)
-        self.student_table.column('name',width=30)
-        self.student_table.column('id',width=17)
+        self.student_table.column('id', width=50)
+        self.student_table.column('name', width=100)
+        self.student_table.column('email', width=150)
+        self.student_table.column('phone', width=100)
+        self.student_table.column('certi', width=120)
+        self.student_table.column('gender', width=80)
+        self.student_table.column('address', width=150)
+        
+        self.fetch_all()
 
+    # -------- connect -----------
+    
+    def add_student(self) :
+        con = pymysql.connect(host = 'localhost',
+            user = 'root',
+            password = '',
+            database = 'stud')
+        cur = con.cursor()
+        cur.execute("insert into student values(%s,%s,%s,%s,%s,%s,%s)",(
+            self.ID_var.get(),
+            self.Name_var.get(),
+            self.Email_var.get(),
+            self.Phone_var.get(),
+            self.Qualifications_var.get(),
+            self.Sex_var.get(),
+            self.Addresse_var.get(),
+        ))
+        con.commit()
+        con.close()
+
+    def fetch_all(self) :
+        con = pymysql.connect(host = 'localhost',
+            user = 'root',
+            password = '',
+            database = 'stud')
+        cur = con.cursor()
+        cur.execute("select * from student")
+        rows = cur.fetchall()
+        if len(rows) != 0 :
+            self.student_table.delete(*self.student_table.get_children())
+            for row in rows :
+                self.student_table.insert("",END,values=row)
+            con.commit()
+        con.close()
 
 win = Tk()
 student1 = student(win)

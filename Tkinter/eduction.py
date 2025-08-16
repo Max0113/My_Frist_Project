@@ -1,32 +1,20 @@
-import tkinter as tk
-from tkinter import ttk
+from tkinter import *
 
-win = tk.Tk()
-win.title("جدول بـ Treeview")
-win.geometry("600x300")
+class MyApp:
+    def __init__(self, root):
+        self.ID_var = StringVar()  # متغير نصوص
 
-# 1) إنشاء الـ Treeview مع الأعمدة
-cols = ("ID", "الاسم", "العمر")
-table = ttk.Treeview(win, columns=cols, show="headings", height=8)
+        Label(root, text="أدخل الـ ID:").pack()
+        Entry(root, textvariable=self.ID_var).pack()
 
-# 2) عناوين الأعمدة + المقاسات
-for c in cols:
-    table.heading(c, text=c)
-table.column("ID", width=60, anchor="center")
-table.column("الاسم", width=200)
-table.column("العمر", width=80, anchor="center")
+        Button(root, text="عرض القيمة", command=self.show_value).pack()
 
-# 3) إدخال بيانات
-data = [
-    (1, "أمين", 22),
-    (2, "سارة", 19),
-    (3, "ياسين", 25),
-    (4, "خديجة", 21),
-]
-for row in data:
-    table.insert("", "end", values=row)
+    def show_value(self):
+        print("القيمة المدخلة:", self.ID_var.get())  # الحصول على النص
 
-table.pack(fill="both", expand=True)
-win.mainloop()
+root = Tk()
+app = MyApp(root)
+root.mainloop()
+
 
 
