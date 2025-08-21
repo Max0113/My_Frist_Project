@@ -1,20 +1,10 @@
-from tkinter import *
+import pymysql
 
-class MyApp:
-    def __init__(self, root):
-        self.ID_var = StringVar()  # متغير نصوص
-
-        Label(root, text="أدخل الـ ID:").pack()
-        Entry(root, textvariable=self.ID_var).pack()
-
-        Button(root, text="عرض القيمة", command=self.show_value).pack()
-
-    def show_value(self):
-        print("القيمة المدخلة:", self.ID_var.get())  # الحصول على النص
-
-root = Tk()
-app = MyApp(root)
-root.mainloop()
+mydb =pymysql.connect(host='localhost',user='root',password='',database='test1')
+curs = mydb.cursor()
+curs.execute("CREATE TABLE student (name VARCHAR(255), address VARCHAR(255))")
+mydb.commit
+mydb.close
 
 
 
