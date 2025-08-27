@@ -4,11 +4,38 @@ import os
 import webbrowser
 import sys
 
+# ----- window --------
 win = Tk()
 win.geometry('800x450')
 win.resizable(False,False)
 win.title("SUPERMARKET")
 win.iconbitmap("C:\\Users\\Gk\\Desktop\\younes\\Codhub\\My_Frist_Project\\Tkinter\\Project_3\\shops.ico")
+
+# ------ methode -------
+
+u1 = 'https://www.facebook.com/'
+u2 = 'https://web.telegram.org/'
+u3 = 'https://www.youtube.com/'
+def open1() :
+    webbrowser.open_new(u1)
+def open2() :
+    webbrowser.open_new(u2)
+def open3() :
+    webbrowser.open_new(u3)
+
+def information_developer() :
+    messagebox.showinfo("information de developrer","Younes Amzil j'ai 14 ans")
+
+def information_Project() :
+    messagebox.showinfo("information de Project","c'est la deuxeme project pour moi")
+    
+def log() :
+    user = Enter1.get()
+    passw = Enter2.get()
+    if user == 'younes' and passw == '123456' :
+        messagebox.showinfo("programme","login he is succese")
+    else :
+        messagebox.showinfo("programme","login he is Error")
 
 # -------- nevbar --------
 
@@ -29,22 +56,22 @@ Title2.pack(pady=8)
 Title3 = Label(farm1,text= "وسايل تواصل بنا",bg="#002C5F",font=("tajawal",11,'bold'),fg="#ffffff")
 Title3.pack(pady=8)
 
-button1 = Button(farm1,text= "حسابنا علي فايسبوك",bg="#d2a500",font=("tajawal",10,'bold'), width=30)
+button1 = Button(farm1,text= "حسابنا علي فايسبوك",bg="#d2a500",font=("tajawal",10,'bold'), width=30, command=open1)
 button1.pack(pady=7)
 
-button2 = Button(farm1,text= "حسابنا علي تيليعرام",bg="#d2a500",font=("tajawal",10,'bold'), width=30)
+button2 = Button(farm1,text= "حسابنا علي تيليعرام",bg="#d2a500",font=("tajawal",10,'bold'), width=30 , command=open2)
 button2.pack(pady=7)
 
-button3 = Button(farm1,text= "حسابنا علي يوتيوب",bg="#d2a500",font=("tajawal",10,'bold'), width=30)
+button3 = Button(farm1,text= "حسابنا علي يوتيوب",bg="#d2a500",font=("tajawal",10,'bold'), width=30, command=open3)
 button3.pack(pady=7)
 
-button4 = Button(farm1,text= "لمحة عن المطور",bg="#d2a500",font=("tajawal",10,'bold'), width=30)
+button4 = Button(farm1,text= "لمحة عن المطور",bg="#d2a500",font=("tajawal",10,'bold'), width=30,command=information_developer)
 button4.pack(pady=7)
 
-button5 = Button(farm1,text= "لمحة عن المشرع",bg="#d2a500",font=("tajawal",10,'bold'), width=30)
+button5 = Button(farm1,text= "لمحة عن المشرع",bg="#d2a500",font=("tajawal",10,'bold'), width=30,command=information_Project)
 button5.pack(pady=7)
 
-button6 = Button(farm1,text= "اغلاق البرنامج",bg="#d2a500" ,font=("tajawal",10), width=30)
+button6 = Button(farm1,text= "اغلاق البرنامج",bg="#d2a500" ,font=("tajawal",10), width=30, command=quit)
 button6.pack(pady=7)
 
 Image1 = PhotoImage(file="C:\\Users\\Gk\\Desktop\\younes\\Codhub\\My_Frist_Project\\Tkinter\\Project_3\\store.png")
@@ -70,7 +97,7 @@ Title2.place(x=260,y=70)
 Enter2 = Entry(farm2)
 Enter2.place(x=130,y=80)
 
-button_Entry = Button(farm2,text="تسجيل الدخول",bg="#d2a500",width=15,height=4)
+button_Entry = Button(farm2,text="تسجيل الدخول",bg="#d2a500",width=15,height=4 , command=log)
 button_Entry.place(x=9,y=35)
 
 win.mainloop()
