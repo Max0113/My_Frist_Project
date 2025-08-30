@@ -11,6 +11,11 @@ win.resizable(False,False)
 win.title("SUPERMARKET")
 win.iconbitmap("C:\\Users\\Gk\\Desktop\\younes\\Codhub\\My_Frist_Project\\Tkinter\\Project_3\\shops.ico")
 
+# ------- Variables ------
+
+Name = StringVar()
+Passowrd = StringVar()
+
 # ------ methode -------
 
 u1 = 'https://www.facebook.com/'
@@ -89,12 +94,12 @@ imo2.place(x=430,y=5)
 
 Title1 = Label(farm2,text=" :  اسم المستخدم", bg="#002C5F", font=("tajawal",15,'bold'), fg="#000000")
 Title1.place(x=260,y=30)
-Enter1 = Entry(farm2)
+Enter1 = Entry(farm2,textvariable=Name)
 Enter1.place(x=130,y=40)
 
 Title2 = Label(farm2,text=" :  كـــــــــــــــــــلمة المرور", bg="#002C5F", font=("tajawal",15,'bold'), fg="#000000")
 Title2.place(x=260,y=70)
-Enter2 = Entry(farm2)
+Enter2 = Entry(farm2,textvariable=Passowrd)
 Enter2.place(x=130,y=80)
 
 button_Entry = Button(farm2,text="تسجيل الدخول",bg="#d2a500",width=15,height=4 , command=log)
