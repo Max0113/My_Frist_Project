@@ -9,7 +9,8 @@ win = Tk()
 win.geometry('800x450')
 win.resizable(False,False)
 win.title("SUPERMARKET")
-win.iconbitmap("C:\\Users\\Gk\\Desktop\\younes\\Codhub\\My_Frist_Project\\Tkinter\\Project_3\\shops.ico")
+# win.iconbitmap("C:\\Users\\Gk\\Desktop\\younes\\Codhub\\My_Frist_Project\\Tkinter\\Project_3\\shops.ico")
+win.iconbitmap("C:\\Users\\amzil\\Desktop\\Codhub\\My_Frist_Project\\Tkinter\\Project_3\\shops.ico")
 
 # ------- Variables ------
 
@@ -39,6 +40,7 @@ def log() :
     passw = Enter2.get()
     if user == 'younes' and passw == '123456' :
         messagebox.showinfo("programme","login he is succese")
+        import super
     else :
         messagebox.showinfo("programme","login he is Error")
 
@@ -79,15 +81,17 @@ button5.pack(pady=7)
 button6 = Button(farm1,text= "اغلاق البرنامج",bg="#d2a500" ,font=("tajawal",10), width=30, command=quit)
 button6.pack(pady=7)
 
-Image1 = PhotoImage(file="C:\\Users\\Gk\\Desktop\\younes\\Codhub\\My_Frist_Project\\Tkinter\\Project_3\\store.png")
+# Image1 = PhotoImage(file="C:\\Users\\Gk\\Desktop\\younes\\Codhub\\My_Frist_Project\\Tkinter\\Project_3\\store.png")
+Image1 = PhotoImage(file="C:\\Users\\amzil\\Desktop\\Codhub\\My_Frist_Project\\Tkinter\\Project_3\\store.png")
 size = Image1.subsample(2,2)
 imo = Label(win,image=size)
-imo.place(x=150,y=43)
+imo.place(x=150,y=43) 
 
 farm2 = Frame(win,bg="#002C5F")
 farm2.place(x=0,y=310,width=575,height=160)
 
-Image2 = PhotoImage(file="C:\\Users\\Gk\\Desktop\\younes\\Codhub\\My_Frist_Project\\Tkinter\\Project_3\\person.png")
+# Image2 = PhotoImage(file="C:\\Users\\Gk\\Desktop\\younes\\Codhub\\My_Frist_Project\\Tkinter\\Project_3\\person.png")
+Image2 = PhotoImage(file="C:\\Users\\amzil\\Desktop\\Codhub\\My_Frist_Project\\Tkinter\\Project_3\\person.png")
 size2 = Image2.subsample(4,4)
 imo2 = Label(farm2,image=size2 ,background="#d2a500")
 imo2.place(x=430,y=5)
@@ -105,4 +109,4 @@ Enter2.place(x=130,y=80)
 button_Entry = Button(farm2,text="تسجيل الدخول",bg="#d2a500",width=15,height=4 , command=log)
 button_Entry.place(x=9,y=35)
 
-win.mainloop()
+win.mainloop() 

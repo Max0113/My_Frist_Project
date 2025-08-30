@@ -434,6 +434,7 @@ rice : """)
         Entry13_Electric.place(x=50,y=54+400,width=100)
 
 
+        # _______ Method _______
 
 
         
