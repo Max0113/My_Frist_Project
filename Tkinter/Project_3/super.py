@@ -107,7 +107,7 @@ class super :
         Entry3_IN = Entry(Frame_Inscription,justify="center", textvariable=self.NumberInvoice)
         Entry3_IN.place(x=70+25,y=110+5)
 
-        Button_IN = Button(Frame_Inscription,text="بحت",bg="#ffffff",fg="#000000",width=10,height=4)
+        Button_IN = Button(Frame_Inscription,text="بحت",bg="#ffffff",fg="#000000",width=10,height=4, command=self.welcome) 
         Button_IN.place(x=5+5,y=55+5)
 
         # ____________ BoxText _______________
@@ -118,37 +118,38 @@ class super :
         Frame_BoxText = Frame(self.root, bg="#FFFFFF" )
         Frame_BoxText.place(x=961,y=210,width=338,height=330)
 
-        BoxText = tk.Text(Frame_BoxText , width=39 , height=20)
-        BoxText.place(x=21,y=1)
+        self.BoxText = tk.Text(Frame_BoxText , width=39 , height=20)
+        self.BoxText.place(x=21,y=1)
 
-        Scrollbar_BoxText = Scrollbar(Frame_BoxText,orient=VERTICAL, command=BoxText.yview)
+        Scrollbar_BoxText = Scrollbar(Frame_BoxText,orient=VERTICAL, command=self.BoxText.yview)
         Scrollbar_BoxText.place(x=1,y=1,height=327)
 
-        BoxText.config(yscrollcommand=Scrollbar_BoxText.set)
+        self.BoxText.config(yscrollcommand=Scrollbar_BoxText.set)
 
-        BoxText.insert(END , """====================================
-Name :
-Phone :
-num_bill :
-====================================
-Fatora :
-rice : """)
+        self.BoxText.delete('1.0',END)
+        self.BoxText.insert(END , "====================================")
+        self.BoxText.insert(END , f"\n Name :")
+        self.BoxText.insert(END , f"\n Phone :")
+        self.BoxText.insert(END , f"\n num_bill :")
+        self.BoxText.insert(END , "\n====================================")
+        self.BoxText.insert(END , "\n Fatore : ")
+        self.BoxText.insert(END , "\n Peice : ")
         
         # __________ Price ______________
 
         Frame_Price = Frame(self.root,bg="#004D64")
         Frame_Price.place(x=619,y=543,height=156,width=680)
 
-        Button1_Price = Button(Frame_Price,text="الحساب",bg="#D4B100",fg="#000000",height=1,width=13,font=("tajawal",12))
+        Button1_Price = Button(Frame_Price,text="الحساب",bg="#D4B100",fg="#000000",height=1,width=13,font=("tajawal",12),command=self.Price)
         Button1_Price.place(x=470+80,y=30+6)
 
-        Button2_Price = Button(Frame_Price,text="افراغ الحقول",bg="#D4B100",fg="#000000",height=1,width=13,font=("tajawal",12))
+        Button2_Price = Button(Frame_Price,text="افراغ الحقول",bg="#D4B100",fg="#000000",height=1,width=13,font=("tajawal",12),command=self.delate)
         Button2_Price.place(x=400-50+80,y=30+6)
 
         Button3_Price = Button(Frame_Price,text="تصدير الفاتورة",bg="#D4B100",fg="#000000",height=1,width=13,font=("tajawal",12))
         Button3_Price.place(x=470+80,y=80+6)
 
-        Button4_Price = Button(Frame_Price,text="اغلاق البرنامج",bg="#D4B100",fg="#000000",height=1,width=13,font=("tajawal",12))
+        Button4_Price = Button(Frame_Price,text="اغلاق البرنامج",bg="#D4B100",fg="#000000",height=1,width=13,font=("tajawal",12),command=quit)
         Button4_Price.place(x=400-50+80,y=80+6)
         
         Title1_Price = Label(Frame_Price,text="حساب الكلي للبقوليات",bg="#004D64",fg="#D4B100",font=("tajawal",11,"bold") )
@@ -434,16 +435,84 @@ rice : """)
         Entry13_Electric.place(x=50,y=54+400,width=100)
 
 
-        # _______ Method _______
-
-
-        
-
-
         self.root.mainloop()
 
+        # _______ Method _______
 
-        
+    def welcome(self) :
+        self.BoxText.delete('1.0',END)
+        self.BoxText.insert(END , "====================================")
+        self.BoxText.insert(END , f"\n Name :{self.NameSubscriber.get()}")
+        self.BoxText.insert(END , f"\n Phone :{self.NumberSubscriber.get()}")
+        self.BoxText.insert(END , f"\n num_bill :{self.NumberInvoice.get()}")
+        self.BoxText.insert(END , "\n====================================")
+        self.BoxText.insert(END , "\n Fatore : ")
+        self.BoxText.insert(END , f"\n Peice : {self.TOTLE} $")
+
+    def Price(self) :
+        Legumes = float(self.S1.get() 
+                        + self.G2.get()*2.5 
+                        + self.G3.get()*1
+                        + self.G4.get()*2
+                        + self.G5.get()*1.5
+                        + self.G6.get()*1
+                        + self.G7.get()*1
+                        + self.G8.get()*2.5
+                        + self.G9.get()*1.5
+                        + self.G10.get()*1.5
+                        + self.G11.get()*2.5
+                        + self.G12.get()*1.5
+                        + self.G13.get()*1
+                        + self.G14.get()*1
+                        + self.G15.get()*1.5
+                        + self.G16.get()*1.5
+                        + self.G17.get()*2.5 )
+        self.AccountLegumes.set(str(Legumes)+" $")
+
+        Supplies = float(self.S1.get() 
+                        + self.S2.get()*2.5 
+                        + self.S3.get()*1
+                        + self.S4.get()*2
+                        + self.S5.get()*1.5
+                        + self.S6.get()*1
+                        + self.S7.get()*1
+                        + self.S8.get()*2.5
+                        + self.S9.get()*1.5
+                        + self.S10.get()*1.5
+                        + self.S11.get()*2.5
+                        + self.S12.get()*2
+                        + self.S13.get()*1.5
+                        + self.S14.get()*1
+                        + self.S15.get()*1.5
+                        + self.S16.get()*1.5
+                        + self.S17.get()*2.5 )
+        self.AccountSupplies.set(str(Supplies)+" $")
+
+        Electric = float(self.E1.get() 
+                        + self.E2.get()*2.5 
+                        + self.E3.get()*1
+                        + self.E4.get()*2
+                        + self.E5.get()*1.5
+                        + self.E6.get()*1
+                        + self.E7.get()*1
+                        + self.E8.get()*2.5
+                        + self.E9.get()*1.5
+                        + self.E10.get()*1.5
+                        + self.E11.get()*2.5
+                        + self.E12.get()*2
+                        + self.E13.get()*1.5 )
+        self.AccountElectric.set(str(Electric)+" $")
+
+        self.TOTLE = Legumes + Supplies + Electric
+
+    def delate(self) :
+        self.AccountLegumes.set("")
+        self.AccountSupplies.set("")
+        self.AccountElectric.set("")
+
+
+
+
 
 ob = super()
 
