@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QPixmap
 from PyQt5.QtWidgets import QFrame , QLabel , QLineEdit , QPushButton , QCheckBox
+import PyQt5.QtWidgets as QW
 import sys
 
 print(sys.argv)
@@ -8,14 +9,47 @@ print(sys.argv)
 app = QtWidgets.QApplication(sys.argv)
 
 win = QtWidgets.QWidget()
+win = QtWidgets.QMainWindow()
 win.resize(500, 500)
 win.move(200, 200)
 win.setWindowTitle("APP-YounesAmzil")
 win.setStyleSheet("background-color:#ffffff")
 
 # Icon (تأكد أن الملف .ico)
-win.setWindowIcon(QtGui.QIcon("C:\\Users\\Gk\\Desktop\\favpng_22eeecf99b8d92726b4f3735be5473c0.png"))
+win.setWindowIcon(QtGui.QIcon("C:\\Users\\Gk\\Desktop\\younes\\Codhub\\My_Frist_Project\\PyQt5\\Project1\\imge\\favpng_22eeecf99b8d92726b4f3735be5473c0.png"))
 
+# ____ Main _____
+
+menubre = win.menuBar()
+
+l1 = menubre.addMenu("File")
+e1 = QtWidgets.QAction("New File")
+e2 = QtWidgets.QAction("New Folder")
+e3 = QtWidgets.QAction("Save As")
+e4 = QtWidgets.QAction("Exit")
+l1.addAction(e1)
+l1.addAction(e2)
+l1.addAction(e3)
+l1.addAction(e4)
+e1.setShortcut('Ctrl + N')
+e2.setShortcut('Ctrl + F')
+e3.setShortcut('Ctrl + S')
+e4.setShortcut('Ctrl + E')
+def ex () :
+    win.destroy()
+    quit()
+e4.triggered.connect(ex)
+
+
+l2 = menubre.addMenu("Edit")
+l3 = menubre.addMenu("Selection")
+l4 = menubre.addMenu("View")
+l5 = menubre.addMenu("Help")
+
+# ____ Method ____
+
+def Error() :
+    Q1 = QW.QMessageBox.warning(win,"hello","error of inscription !!")
 
 # إنشاء QFrame
 frame = QFrame(win)
@@ -66,6 +100,7 @@ button1.setStyleSheet("""
    color: black;
    border-radius: 5px; 
 """)
+button1.clicked.connect(Error)
 
 button2 = QPushButton("Inscription",frame)
 button2.move(140,200+60)
@@ -78,7 +113,7 @@ button2.setStyleSheet("""
 
 # Image 
 Lable = QLabel(frame)
-photo = QPixmap("C:\\Users\\Gk\\Desktop\\user.png")
+photo = QPixmap("C:\\Users\\Gk\\Desktop\\\\younes\\Codhub\\My_Frist_Project\\PyQt5\\Project1\\imge\\user.png")
 Lable.setPixmap(photo)
 Lable.move(120,20)
 Lable.setStyleSheet("")

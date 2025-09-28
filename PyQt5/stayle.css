@@ -4,3 +4,10 @@ body {
     border-radius: 10px;
     font-family:'Courier New', Courier, monospace;
 }
+
+* {
+   background-color: #ffffff;
+   color: black;
+   border-radius: 10px; 
+   background-size: 10px;
+}
